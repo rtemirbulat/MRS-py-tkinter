@@ -5,13 +5,40 @@ from tkinter import filedialog
 from ttkwidgets.autocomplete import AutocompleteCombobox
 
 root = tk.Tk()
-root.geometry("900x540")
+root.geometry("1350x540")
 files = []
 OPTIONS = [
     "Attorney Letter",
     "Funding",
     "Data Sheet",
-    "Picture","Certification of Driver License","Affidavit of No Insurance","EUO","Bill Summary","Police Report","Patient Information","Insurance Card","Insurance Information","Cover Letter","POM","Consent to Change Attorney","Law Agreement","Medical records","Law Verification","Funding Agreement","Intake Form","NF-2","Insurance Letter","Email receipt","Email from Attorney","Email Confiramtion","Retainer Statement","Liens","Attorney Evaluation letter","Attorney Agreement","Notice of Denial","NF-10","Peer Review","EOR"
+    "Picture",
+    "Certification of Driver License",
+    "Affidavit of No Insurance",
+    "EUO",
+    "Bill Summary",
+    "Police Report",
+    "Patient Information",
+    "Insurance card",
+    "Insurance Information",
+    "Cover Letter",
+    "POM",
+    "Consent to Change Attorney",
+    "Law Agreement",
+    "Medical records",
+    "Law Verification",
+    "Funding Agreement",
+    "Intake Form",
+    "NF-2",
+    "Insurance Letter",
+    "Email receipt",
+    "Email from Attorney",
+    "Email Confirmation",
+    "Retainer Statement",
+    "Liens",
+    "Attorney Evaluation letter",
+    "Attorney Agreement",
+    "Notice of Denial",
+    "NF-10","Peer Review","EOR", "Plaintiff's Response to Demands", "Plaintiff's Verified Answer", "Medical Reports and Doctor's lien",
 ]
 
 data = [
@@ -291,84 +318,39 @@ data = [
 
 #fax variable
 fax= IntVar()
-
-
 # fills listbox with files in curr dir
-
-# TO-DO current directory
 def OpenDir():
     listbox.delete(0, END)
     current_directory = filedialog.askdirectory()
-    # filename = filedialog.askopenfilename(initialdir=current_directory,title="Select File",
-    #                                      filetypes=(("PDFs","*.pdf"),("all files","*.*")))
-    # for widget in listbox.winfo_children():
-    #    widget.destroy()
-
-    # files.append(filename)
-    # print(filename)
     for file in os.listdir(current_directory):
         listbox.insert(END, file)
     folder_lb.config(text=os.path.abspath(current_directory))
 
-
-appendix = StringVar(root)
-
-
-# appendix.set(OPTIONS[0]) # default value
-# is_selected=False
-# file_to_rename = ""
-
+#function to display current file
 def selected_item(event):
     widget = event.widget
     selection = widget.curselection()
     picked = widget.get(selection[0])
     label.config(text=picked)
-
-
+#opens popup when file already moved
 def open_popup():
     top = Toplevel(root)
     top.geometry("120x70")
     top.title("FileNotFoundError")
     Label(top, text="File already removed & moved or does not exist!").place(x=0, y=0)
-
-
+#main renaming function
 def RenameFile():
     file_to_rename = label['text']
     working_dir = folder_lb['text']
-    print(working_dir)
-    # print(working_dir)
     custom = inputtxt.get("1.0", "end")
-    type = appendix.get()
-    print(file_to_rename)
-    # file_to_rename = os.path.spltext(working_dir)[1]
-    # print(file_to_rename)
+    type = entry4.get()
     if fax.get():
-        new_name = entry1.get() + " " + entry2.get() + " " + entry3.get() + " " + custom.strip() + " " +"FAX "+ type
+        new_name = entry1.get() + " " + entry2.get() + " " + entry3.get() + " " + custom.strip() + " " + type +" FAX "
     else:
         new_name = entry1.get() + " " + entry2.get() + " " + entry3.get() + " " + custom.strip() + " " + type
     try:
         os.rename(working_dir + "/" + file_to_rename, working_dir + "/" + new_name + ".pdf")
     except FileExistsError:
-        #ending = file_to_rename.split(".")[0]
-        #n = 2
-        #if ending[-1].isdigit() and int(ending[-1]) >= 2:
-        #    n = int(ending[-1]) + 1
-        #uniq=1
-        #while os.path.exists(working_dir + "/" + file_to_rename+file_to_rename.split(".")[0]):
-         #   uniq += 1
-      #  full_p = working_dir+"/"+new_name
-       # if os.path.isfile(full_p):
-        #    expand = 1
-         #   while True:
-          #      expand += 1
-           #     new_file_name = full_p + str(expand) + ".pdf"
-            #    if os.path.isfile(new_file_name):
-             #       continue
-              #  else:
-               #     full_p = new_file_name
-                #    break
-
-        #os.rename(working_dir + "/" + file_to_rename, new_file_name)
         index = ''
         while True:
             try:
@@ -383,18 +365,17 @@ def RenameFile():
 
     except FileNotFoundError:
         open_popup()
-
+#clear selections
 def Clear():
     inputtxt.delete('1.0', END)
     entry1.delete(0, END)
     entry2.delete(0, END)
     entry3.delete(0, END)
-    appendix.set("")
+    entry4.delete(0, END)#choose option reset
     label.config(text="")
 
-
 # frame for selection and selection label with scrollbar
-listbox = Listbox(root, width=30, height=300, selectmode="SINGLE")
+listbox = Listbox(root, width=40, height=300, selectmode="SINGLE")
 listbox.pack(side=LEFT, padx=30, pady=30, fill=NONE)
 scrollbar = Scrollbar(root)
 scrollbar.pack(side=LEFT, fill=BOTH)
@@ -410,13 +391,13 @@ fr = tk.Frame(root, borderwidth=1, bg="white")
 fr.pack(anchor="nw")
 selected = tk.Label(fr, bg="white", text="Выбранный файл:")
 selected.pack(anchor="nw", side=LEFT)
-label = tk.Label(fr, bg="gray", width=40)  # displays selected file
+label = tk.Label(fr, bg="#dbdbdb", width=40)  # displays selected file
 label.pack(anchor="nw", padx=10, pady=10, side=LEFT)
 
 # label of folder
 folder = tk.Label(fr, bg="white", text="Папка:")
 folder.pack(anchor="nw", side=LEFT)
-folder_lb = tk.Label(fr, bg="gray", width=40)
+folder_lb = tk.Label(fr, bg="#dbdbdb", width=50)
 folder_lb.pack(anchor="nw", padx=10, pady=10, side=LEFT)
 
 # renameto
@@ -428,23 +409,23 @@ fr2 = tk.Frame(root, borderwidth=2, bg="white")
 fr2.pack(anchor="nw", after=rename)
 patients = tk.Label(fr2, bg="white", text="Клиенты :")
 patients.pack(anchor="nw", side=LEFT)
-entry1 = AutocompleteCombobox(fr2, width=10, completevalues=data)
+entry1 = AutocompleteCombobox(fr2, width=30, completevalues=data)
 entry1.pack(side=LEFT, padx=10, pady=10, anchor="nw")
-entry2 = AutocompleteCombobox(fr2, width=10, completevalues=data)
+entry2 = AutocompleteCombobox(fr2, width=30, completevalues=data)
 entry2.pack(side=LEFT, padx=10, pady=10, anchor="nw")
-entry3 = AutocompleteCombobox(fr2, width=10, completevalues=data)
+entry3 = AutocompleteCombobox(fr2, width=30, completevalues=data)
 entry3.pack(side=LEFT, padx=10, pady=10, anchor="nw")
 fax_c = Checkbutton(fr2,text="FAX?",variable=fax,onvalue=1,offvalue=0)
 fax_c.pack(side=LEFT, padx=10, pady=10, anchor="nw")
 
 
-# frame
+# frame of custom input
 fr3 = tk.Frame(root, borderwidth=2, bg="white")
 fr3.pack(anchor="nw", after=fr2, pady=10)
 # custom_input
 custom_input = tk.Label(fr3, bg="white", text="Свободный ввод :")
 custom_input.pack(anchor="nw", side=LEFT)
-inputtxt = tk.Text(fr3, height=2, width=30)
+inputtxt = tk.Text(fr3, height=1, width=40)
 inputtxt.pack(side=LEFT, padx=10, pady=10, anchor="nw")
 
 # frame type of file
@@ -455,8 +436,8 @@ type_input.pack(anchor="nw", side=LEFT)
 #dropdown = OptionMenu(fr4, appendix, *OPTIONS)
 #dropdown.config(width=10)
 #dropdown.pack(side=LEFT, padx=10, pady=10, anchor="nw")
-entry3 = AutocompleteCombobox(fr4, width=10, completevalues=OPTIONS)
-entry3.pack(side=LEFT, padx=10, pady=10, anchor="nw")
+entry4 = AutocompleteCombobox(fr4, width=50, completevalues=OPTIONS)
+entry4.pack(side=LEFT, padx=10, pady=10, anchor="nw")
 
 
 # buttons
