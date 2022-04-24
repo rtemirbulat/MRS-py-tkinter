@@ -5,8 +5,8 @@ Python 3.9
 You can edit client data in array data or add file typ option in OPTIONS array 
 
 Compile by pyinstaller 
-# pip install pyinstaller 
-# pyinstaller --onefile --noconsole --name Multi-Rename-Script main.py
+#### pip install pyinstaller 
+#### pyinstaller --onefile --noconsole --name Multi-Rename-Script main.py
 
 Requirements tkinter (gui library) 
 
