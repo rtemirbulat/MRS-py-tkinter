@@ -39,12 +39,6 @@ OPTIONS = [
     "Attorney Agreement",
     "Notice of Denial",
     "NF-10","Peer Review","EOR", "Plaintiff's Response to Demands", "Plaintiff's Verified Answer", "Medical Reports and Doctor's lien",
-    "Notice of designation and appearance","Notice of appearance, Verified Answer","Notice of entry","Amended Verified Answer","Notice of motion","Verified Answer","MRI Examination","Summary of Service Charges","Invoice ","Hospital Notice","Compliance Conference order","Acknowledgment of Representation","Affidavit of Service ","Entity Information","Driver Record ","NYSCEF Payment Receipt","Appearance report","Notice of Approval","Notice of Case Assembly","Irrevocable Letter of Direction","HIPAA authorization","IME Notice","Notice of Electronic Filing","Preliminary Conference Order and Case Scheduling","Request for Judicial intervention","Third-party Summons","Contract for advance payment","NF-6","Summons","Notice of motion for default judgement","Verified Bill of Particulars","Purchase Agreement","Notice of Petition","EBT (Examination before trial)","Request for Judicial Intervention",
-    
-    
-    
-    
-    
 ]
 
 data = [
